@@ -11,6 +11,11 @@ export default function Index() {
         <Text style={styles.extra}>Alicante, Spain</Text>
         <Text style={styles.extra}>The San Juan's Beach is my favourite!</Text>
       </View>
+      <View style={styles.squares}>
+        <View style={styles.blue}></View>
+        <View style={styles.red}></View>
+        <View style={styles.yellow}></View>
+      </View>
     </View>
   );
 }
@@ -48,5 +53,28 @@ const styles = StyleSheet.create({
   },
   extra: {
     fontSize: 10,
+  },
+  squares: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 8,
+    marginTop: 20,
+    width: "20%",
+  },
+  blue: {
+    backgroundColor: "#1082ed",
+    width: 25,
+    height: 25,
+  },
+  red: {
+    backgroundColor: "#ed1010",
+    width: 25,
+    height: 25,
+    flex: 1,
+  },
+  yellow: {
+    backgroundColor: "#edda10",
+    width: 25,
+    height: 25,
   },
 });
