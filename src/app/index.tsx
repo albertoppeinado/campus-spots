@@ -1,17 +1,55 @@
 import { ScrollView, StyleSheet, Text } from "react-native";
 import { SpotCard } from "@/components/spot-card";
-import { SPOTS } from "@/data/spots";
+                // ADDED
+import { SPOTS, Category, CATEGORY_EMOJI } from "@/data/spots";
 
 export default function Index() {
+  // ADDED
+  const categories: Category[] = [
+    "sight",
+    "food",
+    "park",
+    "museum",
+    "campus",
+    "supermarket",
+  ];
+
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
-      <Text style={styles.subtitle}>{SPOTS.length} places worth visiting</Text>
+      <Text style={styles.subtitle}>
+        {SPOTS.length} places worth visiting
+      </Text>
+
+      {/* Category chips */}
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {categories.map((category) => (
+          <Text key={category} style={{ marginRight: 12 }}>
+            {CATEGORY_EMOJI[category]} {category}
+          </Text>
+        ))}
+      </ScrollView>
+
+      {/* Category counts */}
+      <Text style={styles.subtitle}>
+        {categories
+          .map((category) => {
+            const count = SPOTS.filter(
+              (spot) => spot.category === category
+            ).length;
+
+            return count > 0 ? `${count} ${category}s` : null;
+          })
+          .filter(Boolean)
+          .join(" · ")}
+      </Text>
+
       {SPOTS.map((spot) => (
         <SpotCard key={spot.id} spot={spot} />
       ))}
     </ScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   screen: {
